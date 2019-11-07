@@ -4,42 +4,41 @@
 
 
 var getFriends = require("../data/friends")
+// var getNewFriends = require("../public/survey")
 
 module.exports = function(app){
     app.get("/api/friends", function(req, res) {
             res.json(getFriends)
+
           });
 
     app.post("/api/friends", function(req,res){
         getFriends.push(req.body)
-        res.json(true)
+
+        // var sum = getFriends.map(function(num, index){
+        //     return num + getFriends.scores[index]
+        // })
+        console.log(getFriends[0].scores)
+        console.log(getFriends[1].scores)
     })
         
 }
 
+// var sum = getFriends.scores + 
+// //friends.scores
+// var array1 = [1, 5, 3, 7]
 
+// //newFriends.scores
+// var array2 = [1, 1, 4, 1]
 
-// var express = require("express");
-// var path = require("path");
+// module.exports = function(app){
+//     app.post("/api/friends", function(req, res) {
+//             res.json(getFriends)
 
-// var app = express();
-// var PORT = 8080;
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// app.get("/api/friends", function(req, res) {
-//     console.log("Test")
-//     // return res.json(path.join(__dirname, "../data/friends.js"));
-//   });
-
-// app.post("/api/friends", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../data/friends.js"));
-//     var newFriend = req.body
-//     friends.push(newFriend)
-//     res.json(newFriend)
-// });
-
-// app.listen(PORT, function() {
-//     console.log("App listening on PORT " + PORT);
-// });
+//     var sum = getFriends.map(function(num, index){
+//         return num + newFriends[index]
+//     })
+//     console.log(sum)
+//     })
+//     console.log(sum)
+// }
