@@ -15,17 +15,22 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
         getFriends.push(req.body)
         var userdata = req.body
-        console.log(userdata)
-        for (let i = 0; i < getFriends.length; i++) {
-            var currentFriend = getFriends[i]
-            for (var j=0; j < currentFriend.scores.length; j++){
-                // console.log(currentFriend.scores[j])
-                var currentFriendScore = currentFriend.scores[j]
-                parseInt(currentFriendScore)
-                console.log(parseInt(currentFriendScore))
-            }
+        // console.log(userdata.scores)
+        var userdataTwo = userdata.scores.map(function (req){
+            return parseInt(req, 10)
+        })
+        console.log(userdataTwo)
+
+        // for (let i = 0; i < getFriends.length; i++) {
+        //     var currentFriend = getFriends[i]
+        //     for (var j=0; j < currentFriend.scores.length; j++){
+        //         // console.log(currentFriend.scores[j])
+        //         var currentFriendScore = currentFriend.scores[j]
+        //         parseInt(currentFriendScore)
+        //         console.log(parseInt(currentFriendScore))
+        //     }
                 
-        }
+        // }
         // getFriends[i]
         // var newFriends = getFriends[1].split(",")
         // var sum = getFriends.map(function(num, index){
