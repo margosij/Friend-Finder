@@ -309,7 +309,6 @@
                         .trim()
                     ]
                 };
-                console.log(newFriends);
                 $.post("/api/friends", newFriends, function (data) {
                     $("#modalName").text("Your new friend: " + data.name);
                     $("#match-img").attr("src", data.photo);
