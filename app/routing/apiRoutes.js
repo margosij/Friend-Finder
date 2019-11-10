@@ -1,4 +1,4 @@
-var getFriends = require("../data/friends")
+var getFriends = require("../data/friends.js")
 // var getNewFriends = require("../public/survey")
 
 module.exports = function (app) {
@@ -8,7 +8,7 @@ module.exports = function (app) {
     });
 
     app.post("/api/friends", function (req, res) {
-        getFriends.push(req.body)
+        // getFriends.push(req.body)
         var userdata = req.body
         var userdataTwo = userdata.scores.map(function (req){
             return parseInt(req, 10)
@@ -43,8 +43,11 @@ module.exports = function (app) {
 
         lookForMatch = Math.max.apply(Math, matches)
         matchFound = matches.indexOf(lookForMatch)
-        // getFriends.push(userdata)
-        res.json(userdata[matchFound])
+        getFriends.push(userdata)
+        res.json(getFriends[matchFound])
+        // console.log(matchFound)
+        // console.log(getFriends)
+        // console.log(getFriends[matchFound])
 
     })
 
