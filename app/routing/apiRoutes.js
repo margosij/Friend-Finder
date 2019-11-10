@@ -1,8 +1,3 @@
-// 4. Your `apiRoutes.js` file should contain two routes:
-
-//    * A POST routes `/api/friends`. This will be used to handle incoming survey results. This route will also be used to handle the compatibility logic.
-
-
 var getFriends = require("../data/friends")
 // var getNewFriends = require("../public/survey")
 
@@ -15,50 +10,42 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
         getFriends.push(req.body)
         var userdata = req.body
-        // console.log(userdata.scores)
         var userdataTwo = userdata.scores.map(function (req){
             return parseInt(req, 10)
         })
-        console.log(userdataTwo)
+        // console.log(userdataTwo)
 
-        // for (let i = 0; i < getFriends.length; i++) {
-        //     var currentFriend = getFriends[i]
-        //     for (var j=0; j < currentFriend.scores.length; j++){
-        //         // console.log(currentFriend.scores[j])
-        //         var currentFriendScore = currentFriend.scores[j]
-        //         parseInt(currentFriendScore)
-        //         console.log(parseInt(currentFriendScore))
-        //     }
-                
-        // }
-        // getFriends[i]
-        // var newFriends = getFriends[1].split(",")
-        // var sum = getFriends.map(function(num, index){
-        //     return num + getFriends.scores[index]
+
+        var matches = []
+        var lookForMatch = 0
+        var matchFound = 0
+
+        for (let i = 0; i < getFriends.length-1; i++) {
+            var difference = 0
+            for (let j=0; j < getFriends[i].scores.length; j++){
+                getFriends[i].scores[j] = parseInt(getFriends[i].scores[j])
+                userdata.scores[j] = parseInt(userdata.scores[j])
+                difference += Math.abs(getFriends[i].scores[j] - userdata.scores[j])
+        //         console.log("test", getFriends[i].scores[j])
+        // console.log("test2", userdata.scores[j])
+            }
+                matches.push(difference)
+                // console.log(difference)
+                // console.log(matches)
+        }
+
+        // var final = matches, goal = 0;
+        // var closest = final.reduce(function(prev, curr){
+        //     return (Math.abs(curr-goal) < Math.abs(prev - goal) ? curr : prev);
         // })
-        // console.log(newFriends)
-        // console.log(getFriends[0].scores)
-        // console.log(getFriends[1].scores.split(""))
-        // console.log(getFriends[0]-getFriends[1])
+        //     // console.log(closest)
+
+
+        lookForMatch = Math.max.apply(Math, matches)
+        matchFound = matches.indexOf(lookForMatch)
+        // getFriends.push(userdata)
+        res.json(userdata[matchFound])
+
     })
 
 }
-
-// var sum = getFriends.scores + 
-// //friends.scores
-// var array1 = [1, 5, 3, 7]
-
-// //newFriends.scores
-// var array2 = [1, 1, 4, 1]
-
-// module.exports = function(app){
-//     app.post("/api/friends", function(req, res) {
-//             res.json(getFriends)
-
-//     var sum = getFriends.map(function(num, index){
-//         return num + newFriends[index]
-//     })
-//     console.log(sum)
-//     })
-//     console.log(sum)
-// }
